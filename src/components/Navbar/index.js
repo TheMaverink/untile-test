@@ -18,12 +18,12 @@ const NavLink = styled.a`
   position: relative;
   font-size: 16px;
 
-  color: ${(props) => (props.isActive ? props.theme.colors.lightBlue : props.theme.colors.midGrey)};
+  color: ${(props) => (props.isactive ? props.theme.colors.lightBlue : props.theme.colors.midGrey)};
 
   &::after {
     content: '';
     display: block;
-    width: ${(props) => (props.isActive ? '100%' : '0')};  // Set width based on active state
+    width: ${(props) => (props.isactive ? '100%' : '0')};
     height: 2px;
     background: ${(props) => props.theme.colors.lightBlue};
     transition: width 0.3s;
@@ -38,14 +38,14 @@ const NavLink = styled.a`
 `;
 
 export default function Navbar() {
-  const location = useLocation(); // Get current location
+  const location = useLocation();
 
   return (
     <StyledNavbar>
-      <NavLink href="/calculator" isActive={location.pathname === '/calculator'}>
+      <NavLink href="/calculator" isactive={location.pathname === '/calculator'}>
         CRYPTO CALCULATOR
       </NavLink>
-      <NavLink href="/tickers" isActive={location.pathname === '/tickers'}>
+      <NavLink href="/tickers" isactive={location.pathname === '/tickers'}>
         TICKERS
       </NavLink>
     </StyledNavbar>

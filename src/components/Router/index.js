@@ -2,7 +2,8 @@ import Layout from '../Layout';
 
 import TickersPage from '../../pages/Tickers';
 import CalculatorPage from '../../pages/Calculator';
-import NotFoundPage from '../../pages/NotFound';
+
+import { Heading1 } from '../typography';
 
 import {
   createBrowserRouter,
@@ -29,7 +30,18 @@ const router = createBrowserRouter([
       },
       {
         path: '*',
-        element: <NotFoundPage />,
+        element: (
+          <Heading1
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%,-50%)',
+            }}
+          >
+            PAGE NOT FOUND
+          </Heading1>
+        ),
       },
     ],
   },

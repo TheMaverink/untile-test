@@ -8,6 +8,11 @@ const StyledButton = styled.button`
   padding: 10px 20px;
   cursor: pointer;
   outline: none;
+  opacity: ${props => props.disabled ? 0.65 : 1};
+  cursor: ${props => props.disabled ? 'auto' : 'pointer'};
+  transition: opacity 0.3s ease;
+  height:64px;
+  min-width:180px;
 
   &:hover {
     background-image: linear-gradient(180deg, #194475 1%, #1C4E86 100%);
@@ -27,9 +32,9 @@ const ButtonText = styled.span`
   line-height: 32px;
 `;
 
-const Button = ({ text, onClick }) => {
+const Button = ({ text, onClick, disabled ,style}) => {
   return (
-    <StyledButton onClick={onClick}>
+    <StyledButton onClick={onClick} disabled={disabled} style={style}>
       <ButtonText>{text}</ButtonText>
     </StyledButton>
   );

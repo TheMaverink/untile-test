@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+const StyledInputWrapper = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
 const StyledInput = styled.input`
   background: #ffffff;
   background-image: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
@@ -14,6 +19,8 @@ const StyledInput = styled.input`
   line-height: 32px;
   width: 100%;
   outline: none;
+  min-width: 190px;
+  height: 64px;
 
   &:focus {
     border-color: #a0a0a0;
@@ -21,9 +28,22 @@ const StyledInput = styled.input`
   }
 `;
 
-const TextInput = ({ placeholder, onChange }) => {
+const InputLabel = styled.label`
+  position: absolute;
+  top: -20px;
+  left: 0px;
+  font-size: 13px;
+  color: #2979af;
+  pointer-events: none;
+  font-weight: 700;
+`;
+
+const TextInput = ({ placeholder, onChange, label }) => {
   return (
-    <StyledInput type="text" placeholder={placeholder} onChange={onChange} />
+    <StyledInputWrapper>
+      <InputLabel>{label}</InputLabel>
+      <StyledInput type="text" placeholder={placeholder} onChange={onChange} />
+    </StyledInputWrapper>
   );
 };
 
