@@ -11,13 +11,15 @@ export const selectIsConverterSliceLoading = createSelector(
 export const selectSupportedCurrencies = createSelector(
   selectMarkets,
   (markets) => {
-    const allCoins = markets?.supportedCurrencies || [];
+    const currencies = markets?.supportedCurrencies || [];
 
-  return allCoins.reduce((accumulator, coin) => {
-    const { id, symbol, name } = coin;
-    accumulator[symbol] = { id, symbol, name };
-    return accumulator;
-  }, {});
+    return currencies
+
+  // return allCoins.reduce((accumulator, coin) => {
+  //   const { id, symbol, name } = coin;
+  //   accumulator[symbol] = { id, symbol, name };
+  //   return accumulator;
+  // }, {});
   } 
 );
 

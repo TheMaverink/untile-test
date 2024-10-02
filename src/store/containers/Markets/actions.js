@@ -10,20 +10,22 @@ export const fetchSupportedCurrencies = createAsyncThunk(
       `${API_BASE_URL}/simple/supported_vs_currencies`
     );
 
-    const allCoinsResponse = await axios.get(`${API_BASE_URL}/coins/list`);
+    // const allCoinsResponse = await axios.get(`${API_BASE_URL}/coins/list`);
 
-    if (
-      supportedCurrenciesResponse?.data?.length > 0 &&
-      allCoinsResponse?.data?.length > 0
-    ) {
-      const supportedCurrencies = allCoinsResponse.data?.filter((coin) => {
-        return supportedCurrenciesResponse.data.includes(coin.symbol);
-      });
+    // if (
+    //   supportedCurrenciesResponse?.data?.length > 0 &&
+    //   allCoinsResponse?.data?.length > 0
+    // ) {
+    //   const supportedCurrencies = allCoinsResponse.data?.filter((coin) => {
+    //     return supportedCurrenciesResponse.data.includes(coin.symbol);
+    //   });
 
-      return supportedCurrencies;
-    } else {
-      return [];
-    }
+    //   return supportedCurrenciesResponse.data;
+    // } else {
+    //   return [];
+    // }
+
+    return supportedCurrenciesResponse.data;
   }
 );
 

@@ -6,14 +6,12 @@ import { Heading1 } from '../../components/typography';
 import DropDown from '../../components/inputs/DropDown';
 import Button from '../../components/Button';
 
+import { getCoinName } from '../../utils/misc';
+
 import {
   fetchSupportedCurrencies,
-  fetchConversion,
   fetchExchanges,
   selectSupportedCurrencies,
-  // fetchAllCoins,
-  selectConversionHistory,
-  selectTickers,
   fetchTickers,
   selectExchanges,
   // selectAllCoins,
@@ -57,18 +55,15 @@ const TickerCard = ({ pair, lastValue, lastTrade, market, volume }) => {
 export default function TickersPage() {
   const dispatch = useDispatch();
 
-  // const tickers = useSelector(selectTickers);
   const exchanges = useSelector(selectExchanges);
   const supportedCurrencies = useSelector(selectSupportedCurrencies);
-  // const allCoins = useSelector(selectAllCoins);
 
-  const [market, selectMarket] = React.useState('binance');
+  const [market, selectMarket] = React.useState('Binance');
   const [targetCurrency, setTargetCurrency] = React.useState('btc');
 
   React.useEffect(() => {
-    !exchanges && dispatch(fetchExchanges());
-    !supportedCurrencies && dispatch(fetchSupportedCurrencies());
-    //  dispatch(fetchAllCoins())
+    dispatch(fetchExchanges());
+    dispatch(fetchSupportedCurrencies());
   }, []);
 
   //wrong apis
@@ -80,7 +75,7 @@ export default function TickersPage() {
 
       <div className="tickers-inputs">
         <DropDown
-          options={Object.keys(supportedCurrencies)}
+          options={supportedCurrencies}
           value={targetCurrency}
           onChange={(event) => setTargetCurrency(event.target.value)}
           label="COIN:"
@@ -88,25 +83,21 @@ export default function TickersPage() {
 
         <DropDown
           options={Object.keys(exchanges)}
-          value={market || Object.keys(exchanges)[0]}
+          value={market || 'Binance'}
           onChange={(event) => selectMarket(event.target.value)}
           label="MARKET:"
         />
 
         <Button
           text={'Search'}
-          onClick={() => {
-            console.log(supportedCurrencies[targetCurrency].name);
-            console.log(market);
-          }}
-          //  onClick={() =>
-          //    dispatch(
-          //      fetchTickers({
-          //        coinName: supportedCurrencies[targetCurrency].name,
-          //        market
-          //      })
-          //    )
-          //  }
+          onClick={() =>
+            dispatch(
+              fetchTickers({
+                coinName: getCoinName(targetCurrency).toLowerCase(),
+                market:market.toLowerCase(),
+              })
+            )
+          }
           style={{ flex: 1 }}
         />
       </div>
